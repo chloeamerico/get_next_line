@@ -6,7 +6,7 @@
 /*   By: camerico <camerico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:06:41 by camerico          #+#    #+#             */
-/*   Updated: 2024/12/09 16:15:03 by camerico         ###   ########.fr       */
+/*   Updated: 2024/12/11 13:56:31 by camerico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ char	*ft_strjoin_free(char const *s1, char const *s2)
 		s3[k++] = s2[j++];
 	s3[k] = '\0';
 	free(s1);
+	s1 = NULL;
 	return (s3);
 }
 
@@ -86,4 +87,29 @@ char	*ft_strchr(const char *s, int c)
 		i++;
 	}
 	return (NULL);
+}
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	size_t	i;
+	size_t	j;
+	char	*s2;
+
+	i = ft_strlen(s);
+	j = 0;
+	if (start >= i)
+		return (ft_strdup(""));
+	if (len > i - start)
+		len = i - start;
+	s2 = malloc(sizeof(char) * len + 1);
+	if (!s2)
+		return (NULL);
+	while (s[start] && j < len)
+	{
+		s2[j] = s[start];
+		j++;
+		start++;
+	}
+	s2[j] = '\0';
+	return (s2);
 }
