@@ -6,7 +6,46 @@
 /*   By: camerico <camerico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:06:23 by camerico          #+#    #+#             */
-/*   Updated: 2024/12/04 15:06:24 by camerico         ###   ########.fr       */
+/*   Updated: 2024/12/12 18:31:50 by camerico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+
+#endif
+
+/* ************************************************************************** */
+/* INCLUDES                                                                   */
+/* ************************************************************************** */
+
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <strings.h>
+# include <unistd.h>
+
+/* ************************************************************************** */
+/* DEFINES                                                                    */
+/* ************************************************************************** */
+
+int	ft_strlen (const char *s);
+char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strdup_free(const char *s);
+char	*ft_strchr(const char *s, int c);
+char	*ft_substr(char const *s, unsigned int start, int len);
+char	*get_next_line(int fd);
+
+/* ************************************************************************** */
+/* STRUCTURES                                                                 */
+/* ************************************************************************** */
+
+/* ************************************************************************** */
+/* PROTO                                                                      */
+/* ************************************************************************** */
+
+
+#endif

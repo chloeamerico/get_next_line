@@ -6,7 +6,7 @@
 /*   By: camerico <camerico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:06:41 by camerico          #+#    #+#             */
-/*   Updated: 2024/12/11 13:56:31 by camerico         ###   ########.fr       */
+/*   Updated: 2024/12/12 14:41:15 by camerico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,8 @@ int	ft_strlen (const char *s)
 	return (i);
 }
 
-// si la nouvelle ligne est deja remplie , strjoinfree s1(line) et s2(buffer)
-// deja free dans la fonction
-char	*ft_strjoin_free(char const *s1, char const *s2)
+// si la nouvelle ligne est deja remplie , strjoin s1(line) et s2(buffer)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
 	int		i;
 	int		j;
@@ -36,6 +35,8 @@ char	*ft_strjoin_free(char const *s1, char const *s2)
 	i = 0;
 	j = 0;
 	k = 0;
+	if (!s1 || !s2)
+		return (NULL);
 	s3 = malloc(sizeof(char) * ((ft_strlen(s1) + ft_strlen(s2)) + 1));
 	if (!s3)
 		return (NULL);
@@ -44,8 +45,7 @@ char	*ft_strjoin_free(char const *s1, char const *s2)
 	while (s2[j])
 		s3[k++] = s2[j++];
 	s3[k] = '\0';
-	free(s1);
-	s1 = NULL;
+	// free(s1);
 	return (s3);
 }
 
@@ -59,6 +59,8 @@ char	*ft_strdup_free(const char *s)
 	char	*dest;
 
 	i = 0;
+	if (!s)
+		return (NULL);
 	dest = malloc((ft_strlen(s) + 1) * sizeof(char));
 	if (dest == NULL)
 		return (NULL);
@@ -73,30 +75,37 @@ char	*ft_strdup_free(const char *s)
 }
 
 // recherche la premiere occurence du char c dans *s
-// retourne le reste de la string a partir du premier char c + 1 trouve (\n)
+// retourne le reste de la string a partir du premier char c trouve (\n)
 // verifie s'il y a un \n dan le buffer
 char	*ft_strchr(const char *s, int c)
 {
 	int	i;
 
 	i = 0;
+	if (!s)
+		return (NULL);
 	while (s[i]) 
 	{
 		if (s[i] == (char)c)
-			return ((char *)(s + i + 1));
+			return (char *)(s + i);
 		i++;
 	}
 	return (NULL);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+// retourne une nouvelle string issue de s qui commence a start et
+// de taille max len.  s2 est la nouvelle chaine
+// utilisation de *malloc*
+char	*ft_substr(char const *s, unsigned int start, int len)
 {
-	size_t	i;
-	size_t	j;
+	int	i;
+	int	j;
 	char	*s2;
 
 	i = ft_strlen(s);
 	j = 0;
+	if (!s)
+		return (NULL);
 	if (start >= i)
 		return (ft_strdup(""));
 	if (len > i - start)
